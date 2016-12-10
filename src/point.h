@@ -3,15 +3,15 @@
  *
  *       Filename:  point.h
  *
- *    Description:  
+ *    Description:  Header file for object Point.
  *
  *        Version:  1.0
  *        Created:  12/07/2016 10:28:11 AM
  *       Revision:  none
- *       Compiler:  gcc
+ *       Compiler:  g++
  *
- *         Author:  YOUR NAME (), 
- *   Organization:  
+ *         Author:  Vaclav Pokorny
+ *   Organization:  mat.fs.cvut.cz
  *
  * =====================================================================================
  */
@@ -28,13 +28,13 @@ using namespace std;
 //declare constants
 class Point {
     private:
-        double X, Y, U, V, P, velocity, vorticity, K, omega;
+        vector<double> HodnotyPromennych;
 
     public:
         Point();
-        void PointVlozHodnoty(vector<double>& Input);
-        void PointVypisHodnoty();
-//        ~Point();
+//      ~Point();
+        void PointVlozHodnotuPromenne(double HodnotaPromenne);
+        double PointVypisHodnotuPromenne(int IndexPromenne);
 };
 
 #endif

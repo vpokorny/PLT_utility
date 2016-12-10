@@ -50,6 +50,41 @@ void PLT::PLTPreskocRadky(ifstream& file, int PocetRadku)
     }
 }
 
+vector<string> PLT::PLTNajdiNazvyPromennych(string radek)
+{
+    vector<string> NalezenePromenne;
+    string PocatecniZnak = "\"";
+    string KoncovyZnak = "\",";
+    int PocetPromenych = 0;
+
+    string token;
+    size_t PozicePocatecnihoZnaku = 0, PoziceKoncovehoZnaku = 0;
+
+    while((PozicePocatecnihoZnaku = radek.find(PocatecniZnak)) != string::npos)
+    {
+        radek = radek.erase(0,PozicePocatecnihoZnaku + PocatecniZnak.length());
+        if((PoziceKoncovehoZnaku = radek.find(PocatecniZnak)) != string::npos)
+        {
+            token = radek.substr(0, PoziceKoncovehoZnaku);
+            radek = radek.erase(0, PoziceKoncovehoZnaku + KoncovyZnak.length());
+        }
+        else
+            return NalezenePromenne;
+        NalezenePromenne.push_back(token);
+    }
+
+    /*
+    while((PozicePocatecnihoZnaku = radek.find(PocatecniZnak)) != string::npos && (PoziceKoncovehoZnaku = radek.find(KoncovyZnak)) != string::npos)
+    {
+        token = radek.substr(0, PoziceKoncovehoZnaku);
+        token = token.erase(0, PozicePocatecnihoZnaku + PocatecniZnak.length());
+        radek = radek.erase(0, PoziceKoncovehoZnaku + KoncovyZnak.length());
+        NalezenePromenne.push_back(token);
+    }
+    */
+    //return NalezenePromenne;
+}
+
 int PLT::PLTNajdiPocetBodu(string radek)
 {
     string PocatecniZnak = "=";
@@ -69,7 +104,7 @@ int PLT::PLTNajdiPocetBodu(string radek)
     }
     else
     {
-        cout << "Chyba pri naciatani poctu bodu ... (konec radku)";
+        cout << "Chyba pri nacitani poctu bodu ... (konec radku)";
         exit(1);
     }
 }
@@ -105,22 +140,22 @@ int PLT::PLTNajdiPocetElementu(string radek)
 
 void PLT::PLTVlozBody(ifstream& file, Mesh& mesh)
 {
-    const int PocetPromennych = 9;
     vector<double> Input;
 
-    cout << "Nacitam hodnoty promennych ..." << endl;
-    Input.resize(PocetPromennych);
+    cout << "Nacitam hodnoty promennych ..." << endl
+         << "Pocet promenych v bode je: " << mesh.MeshVypisPocetPromennych() << endl;
+    Input.resize(mesh.MeshVypisPocetPromennych());
     for(int i = 0; i < mesh.MeshVypisPocetBodu(); i++)
     {
-        for(int j = 0; j < PocetPromennych; j++)
+        for(int j = 0; j < mesh.MeshVypisPocetPromennych(); j++)
             if (!(file >> Input.at(j)))
             {
                 cerr << "Chyba pri nacitani hodnot promennych ..." << endl;
                 exit(1);
             }
 
-        mesh.point[i].PointVlozHodnoty(Input);
-        //mesh.point[i].PointVypisHodnoty();
+        mesh.MeshVlozHodnotyDoBodu(i, Input);
+        //mesh.MeshVypisHodnotyPromennychVBode(i);
         //cin.get();
     }
     cout << "Hotovo ..." << endl;
@@ -160,25 +195,33 @@ Mesh PLT::PLTNactiSoubor(int argc, char* argv[])
     auto filename = PLTZiskejNazevSouboru(argv);
     ifstream file(filename.c_str());
 
-    PLTPreskocRadky(file, 1);
+    //PLTPreskocRadky(file, 1);
+
+    getline(file, radek);
+    mesh.MeshVlozNazvyPromennych(PLTNajdiNazvyPromennych(radek));
+    mesh.MeshVypisNazvyPromennych();
+    //mesh.MeshVlozPocetPromennych(PLTNajdiPocetPromennych(radek));
+
     getline(file, radek);
     mesh.MeshVlozPocetBodu(PLTNajdiPocetBodu(radek));
+    cout << "Pocet bodu site je: " << mesh.MeshVypisPocetBodu() << endl;
     mesh.MeshVlozPocetElementu(PLTNajdiPocetElementu(radek));
+    cout << "Pocet elementu site je: " << mesh.MeshVypisPocetElementu() << endl;
+
     mesh.MeshRealokujPamet();
 
     PLTVlozBody(file, mesh);
     PLTPreskocRadky(file, 1);
     PLTVlozElementy(file, mesh);
 
-    cout << "Posldeni bod je: " << endl;
-    mesh.point[mesh.MeshVypisPocetBodu() - 1].PointVypisHodnoty();
+    cout << "Posledni bod je: " << endl;
+    mesh.MeshVypisHodnotyPromennychVBode(mesh.MeshVypisPocetBodu() - 1);
     mesh.triangle[mesh.MeshVypisPocetElementu() - 1].TriangleVypisVrcholy();
 
     //test
     //getline(file, radek);
     //cout << radek << endl;
     //cout <<  x << "\t" <<  y << "\t" <<  u << "\t" << v << "\t" <<  p << "\t" <<  velocity << "\t" <<  vorticity << "\t" <<  k << "\t" << omega << endl;
-
     file.close();
     return mesh;
 }

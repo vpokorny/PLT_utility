@@ -24,6 +24,7 @@ class PLT {
         void PLTZkontrolujVstupniParametry(int argc, char* argv[]);
         string PLTZiskejNazevSouboru(char* argv[]);
         void PLTPreskocRadky(ifstream& file, int PocetRadku);
+        vector<string> PLTNajdiNazvyPromennych(string radek);
         int PLTNajdiPocetBodu(string radek);
         int PLTNajdiPocetElementu(string radek);
         void PLTVlozBody(ifstream& file, Mesh& mesh);
