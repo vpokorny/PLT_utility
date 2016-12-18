@@ -1,28 +1,30 @@
 /*
- * PLT.h -- pack of functions for intersect.c program
- * License: Freeware
- * Author: Václav Pokorný
- * Version: 2015-7-14
- * Updates: write to pokorny.vena@gmail.com
+ * =====================================================================================
+ *
+ *       Filename:  PLT.h
+ *
+ *    Description:  Header file for object PLT.
+ *
+ *        Version:  1.0
+ *        Created:  12/07/2016 09:35:16 AM
+ *       Revision:  none
+ *       Compiler:  g++
+ *
+ *         Author:  Vaclav Pokorny
+ *   Organization:  mat.fs.cvut.cz
+ *
+ * =====================================================================================
  */
 
 #ifndef _PLT_H_
 #define _PLT_H_
 
-#include <cstdio>
-#include <cmath>
-#include <iostream>
-#include <fstream>
-#include <string>
-#include <sstream>
 #include "mesh.h"
 
 using namespace std;
 
 class PLT {
     private:
-        void PLTZkontrolujVstupniParametry(int argc, char* argv[]);
-        string PLTZiskejNazevSouboru(char* argv[]);
         void PLTPreskocRadky(ifstream& file, int PocetRadku);
         vector<string> PLTNajdiNazvyPromennych(string radek);
         int PLTNajdiPocetBodu(string radek);
@@ -31,7 +33,7 @@ class PLT {
         void PLTVlozElementy(ifstream& file, Mesh& mesh);
 
     public:
-        Mesh PLTNactiSoubor(int argc, char* argv[]);
+        Mesh PLTNactiSoubor(string Filename);
 };
 
 #endif

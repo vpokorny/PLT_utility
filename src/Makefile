@@ -1,9 +1,10 @@
 CXX      = g++
-CXXFLAGS = -O -std=c++11
+CXXFLAGS = -O2 -std=c++11 -g
 
-all: main
+all: ProvedRez
 
 clean:
-	rm -f main
+	rm -f ../bin/ProvedRez
 
-main: $(wildcard *.cpp) $(wildcard *.hpp)
+ProvedRez: $(wildcard *.cpp) $(wildcard *.hpp)
+	$(CXX) $(CXXFLAGS) $(wildcard *.cpp) $(wildcard *.hpp) -o ../bin/ProvedRez

@@ -3,10 +3,10 @@
  *
  *       Filename:  mesh.h
  *
- *    Description:  Mesh header file
+ *    Description:  Header file for object Mesh.
  *
  *        Version:  1.0
- *        Created:  12/07/2016 11:34:31 AM
+ *        Created:  12/07/2016 11:25:50 AM
  *       Revision:  none
  *       Compiler:  g++
  *
@@ -15,6 +15,7 @@
  *
  * =====================================================================================
  */
+
 #ifndef _MESH_H_
 #define _MESH_H_
 
@@ -30,14 +31,14 @@ using namespace std;
 //declare constants
 class Mesh {
     private:
-        int PocetBodu, PocetElementu, PocetPromennych;
+        int PocetBodu, PocetElementu, PocetPromennych, PocetHran;
         vector<string> NazevPromennych;
+        vector<Point> point;
+        vector<Triangle> triangle;
 
     public:
-        vector<Triangle> triangle;
-        vector<Point> point;
-
         Mesh();
+        ~Mesh();
         int MeshVypisPocetPromennych();
         int MeshVypisPocetBodu();
         int MeshVypisPocetElementu();
@@ -49,7 +50,13 @@ class Mesh {
         void MeshRealokujPamet();
         void MeshVlozHodnotyDoBodu(int IndexBodu, vector<double>& Promenne);
         void MeshVypisHodnotyPromennychVBode(int IndexBodu);
-//      ~Mesh();
+        string MeshVypisNazevPromenne(int IndexPromenne);
+        int MeshPrevedNazevNaHodnotuPromenne(string Promenna);
+        int MeshVypisVrcholTriangle(int IndexTriangle, string Promenna);
+        double MeshVypisHodnotuPromenneVBode(int IndexBodu, string Promenna);
+        double MeshVypisPromennouVeVrcholuTriangle(int IndexTriangle, string Vrchol, string Promenna);
+        Point MeshPrepisPromenneZBoduDoBodu(Point VkladanyBod);
+        void MeshVlozHodnotyDoTriangle(int IndexElementu, vector<int>& VkladaneHodnoty);
 };
 
 #endif

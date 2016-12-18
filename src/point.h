@@ -19,7 +19,6 @@
 #ifndef _POINT_H_
 #define _POINT_H_
 
-#include <cstdlib>
 #include <iostream>
 #include <vector>
 
@@ -32,9 +31,11 @@ class Point {
 
     public:
         Point();
-//      ~Point();
+        ~Point();
         void PointVlozHodnotuPromenne(double HodnotaPromenne);
         double PointVypisHodnotuPromenne(int IndexPromenne);
+        int PointVypisVelikostVektoru();
+        void PointVypisHodnotyPromennych();
 };
 
 #endif

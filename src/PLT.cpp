@@ -3,7 +3,7 @@
  *
  *       Filename:  PLT.cpp
  *
- *    Description:  
+ *    Description:  File of source code of methods for object PLT.
  *
  *        Version:  1.0
  *        Created:  12/07/2016 09:35:16 AM
@@ -16,25 +16,14 @@
  * =====================================================================================
  */
 
+#include <cmath>
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <sstream>
 #include "PLT.h"
 
-inline void PLT::PLTZkontrolujVstupniParametry(int argc, char* argv[])
-{
-    cout << "Kontroluji vstupni hodnoty ..." << endl;
-    if(argc !=2)
-    {
-        cerr << "Usage: " << argv[0] << " 'InputFilename'" << endl;
-        exit(1);
-    }
-    cout << " V poradku ..." << endl;
-}
-
-inline string PLT::PLTZiskejNazevSouboru(char* argv[])
-{
-    string inputFilename = argv[1];
-    cout << "Nazev vstupniho souboru je: " << inputFilename << endl;
-    return inputFilename;
-}
+using namespace std;
 
 void PLT::PLTPreskocRadky(ifstream& file, int PocetRadku)
 {
@@ -142,8 +131,8 @@ void PLT::PLTVlozBody(ifstream& file, Mesh& mesh)
 {
     vector<double> Input;
 
-    cout << "Nacitam hodnoty promennych ..." << endl
-         << "Pocet promenych v bode je: " << mesh.MeshVypisPocetPromennych() << endl;
+     cout << "Pocet promenych v bode je: " << mesh.MeshVypisPocetPromennych() << endl
+          << "Nacitam hodnoty promennych ..." << endl;
     Input.resize(mesh.MeshVypisPocetPromennych());
     for(int i = 0; i < mesh.MeshVypisPocetBodu(); i++)
     {
@@ -164,7 +153,7 @@ void PLT::PLTVlozBody(ifstream& file, Mesh& mesh)
 void PLT::PLTVlozElementy(ifstream& file, Mesh& mesh)
 {
     const int PocetVrcholu = 3;
-    vector<double> Input;
+    vector<int> Input;
 
     cout << "Nacitam vrcholy elementu ..." << endl;
     Input.resize(PocetVrcholu);
@@ -178,22 +167,19 @@ void PLT::PLTVlozElementy(ifstream& file, Mesh& mesh)
                 exit(1);
             }
 
-        mesh.triangle[i].TriangleVlozVrcholy(Input);
+        mesh.MeshVlozHodnotyDoTriangle(i, Input);
         //  mesh.triangle[i].TriangleVypisVrcholy();
         //  cin.get();
     }
     cout << "Hotovo ..." << endl;
 }
 
-Mesh PLT::PLTNactiSoubor(int argc, char* argv[])
+Mesh PLT::PLTNactiSoubor(string Filename)
 {
     Mesh mesh;
     string radek;
 
-    PLTZkontrolujVstupniParametry(argc, argv);
-
-    auto filename = PLTZiskejNazevSouboru(argv);
-    ifstream file(filename.c_str());
+    ifstream file(Filename.c_str());
 
     //PLTPreskocRadky(file, 1);
 
@@ -214,16 +200,12 @@ Mesh PLT::PLTNactiSoubor(int argc, char* argv[])
     PLTPreskocRadky(file, 1);
     PLTVlozElementy(file, mesh);
 
+    /*
     cout << "Posledni bod je: " << endl;
     mesh.MeshVypisHodnotyPromennychVBode(mesh.MeshVypisPocetBodu() - 1);
     mesh.triangle[mesh.MeshVypisPocetElementu() - 1].TriangleVypisVrcholy();
+    */
 
-    //test
-    //getline(file, radek);
-    //cout << radek << endl;
-    //cout <<  x << "\t" <<  y << "\t" <<  u << "\t" << v << "\t" <<  p << "\t" <<  velocity << "\t" <<  vorticity << "\t" <<  k << "\t" << omega << endl;
     file.close();
     return mesh;
 }
-
-

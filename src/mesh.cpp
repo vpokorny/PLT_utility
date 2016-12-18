@@ -3,10 +3,10 @@
  *
  *       Filename:  mesh.cpp
  *
- *    Description:  Mesh object source code
+ *    Description:  File of source code for object Mesh.
  *
  *        Version:  1.0
- *        Created:  12/07/2016 11:34:31 AM
+ *        Created:  12/07/2016 11:25:50 AM
  *       Revision:  none
  *       Compiler:  g++
  *
@@ -15,15 +15,23 @@
  *
  * =====================================================================================
  */
+
 #include "mesh.h"
 
 Mesh::Mesh()
 {
     PocetBodu = 0;
     PocetElementu = 0;
+    PocetHran = 0;
 
     triangle.resize(PocetElementu);
     point.resize(PocetBodu);
+    //edge.resize(PocetHran);
+}
+
+Mesh::~Mesh()
+{
+
 }
 
 void Mesh::MeshVlozNazvyPromennych(vector<string> NalezeneNazvyPromennych)
@@ -107,4 +115,53 @@ void Mesh::MeshVypisHodnotyPromennychVBode(int IndexBodu)
     cout << "--------------------------------" << endl
         << "Konec vypisu." << endl;
 
+}
+
+string Mesh::MeshVypisNazevPromenne(int IndexPromenne)
+{
+    return NazevPromennych.at(IndexPromenne);
+}
+
+int Mesh::MeshPrevedNazevNaHodnotuPromenne(string Promenna)
+{
+    for(int i = 0; i < MeshVypisPocetPromennych(); i++)
+    {
+        if(MeshVypisNazevPromenne(i).compare(Promenna) == 0)
+        {
+            //cout << "Nalezena shoda: " << Promenna << " je " << i << "-ty prvek vektoru" << endl;
+            return i;
+        }
+    }
+    cerr << Promenna << " nenalezena v seznamu promennych ... exit " << endl;
+    exit(1);
+}
+
+double Mesh::MeshVypisHodnotuPromenneVBode(int IndexBodu, string Promenna)
+{
+    return point.at(IndexBodu).PointVypisHodnotuPromenne(MeshPrevedNazevNaHodnotuPromenne(Promenna));
+}
+
+int Mesh::MeshVypisVrcholTriangle(int IndexTriangle, string Promenna)
+{
+    return triangle.at(IndexTriangle).TriangleVypisIndexVrcholu(Promenna);
+}
+
+double Mesh::MeshVypisPromennouVeVrcholuTriangle(int IndexTriangle, string Vrchol, string Promenna)
+{
+    return MeshVypisHodnotuPromenneVBode(MeshVypisVrcholTriangle(IndexTriangle, Vrchol), Promenna);
+}
+
+Point Mesh::MeshPrepisPromenneZBoduDoBodu(Point VkladanyBod)
+{
+    Point Nosic;
+
+    for(int i = 0; i < VkladanyBod.PointVypisVelikostVektoru(); i++)
+        Nosic.PointVlozHodnotuPromenne(VkladanyBod.PointVypisHodnotuPromenne(i));
+
+    return Nosic;
+}
+
+void Mesh::MeshVlozHodnotyDoTriangle(int IndexElementu, vector<int>& VkladaneHodnoty)
+{
+    triangle.at(IndexElementu).TriangleVlozVrcholy(VkladaneHodnoty);
 }

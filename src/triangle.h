@@ -3,15 +3,15 @@
  *
  *       Filename:  triangle.h
  *
- *    Description:  
+ *    Description:  Header file for object Triangle.
  *
  *        Version:  1.0
  *        Created:  12/07/2016 11:22:43 AM
  *       Revision:  none
- *       Compiler:  gcc
+ *       Compiler:  g++
  *
- *         Author:  YOUR NAME (), 
- *   Organization:  
+ *         Author:  Vaclav Pokorny
+ *   Organization:  mat.fs.cvut.cz
  *
  * =====================================================================================
  */
@@ -21,20 +21,20 @@
 
 #include <iostream>
 #include <vector>
-#include <cstdlib>
+#include <string>
 
 using namespace std;
 
-//declare constants
 class Triangle {
     private:
         int A, B, C;
 
     public:
         Triangle();
-        void TriangleVlozVrcholy(vector<double>& Input);
+        ~Triangle();
+        void TriangleVlozVrcholy(vector<int>& Input);
         void TriangleVypisVrcholy();
-//        ~Triangle();
+        int TriangleVypisIndexVrcholu(string Vrchol);
 };
 
 #endif
