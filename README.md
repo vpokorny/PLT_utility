@@ -3,9 +3,9 @@
 #### Prave pred sebou mate program, ktery provede rez skrz sit, ktera je ve vstupnim adresari "vstupni_data" ve formatu ".plt", rez je ulozen tak, aby bylo mozne jej vizualizovat programem Gnuplot.
 
 ## Postup kompilace:
-	- Prejdete do slozky "src" prikazem : cd src
-	- Zde je vytvoreny Makefile, ktery slouzi ke zkompilovani programu ProvedRez. Kompilaci provedem prikazem : make
-	- Nyni se v adresari "bin" vytvoril spustitelny soubor "ProvedRez". Jeho volani ma specifickou strukturu pro spravnou funkcnost programu je potreba ji dodrzet!!!
+- Prejdete do slozky "src" prikazem : cd src
+- Zde je vytvoreny Makefile, ktery slouzi ke zkompilovani programu ProvedRez. Kompilaci provedem prikazem : make
+- Nyni se v adresari "bin" vytvoril spustitelny soubor "ProvedRez". Jeho volani ma specifickou strukturu pro spravnou funkcnost programu je potreba ji dodrzet!!!
 
 ## Volani programu:
 - Program ocekava vstup z prikazove radky takto:
@@ -16,11 +16,11 @@
 
 - Pokud se chcete takovemu zadavani vyhnout, pak je v adresari "skripty" pripraven skript "ProvedSekvenciRezu.sh", kterym je mozne provest vicero rezu automatizovane s tim, ze je potreba zachovat adresarovou strukturu priblizne takto
 
--ProvedRez
-	-src (zdrojove kody)
-	-vstupni_data (vase vstupni .plt soubory)
-	-bin (adresar s binarkami)
-	-skripty (zde je ulozen skript Prove)
+- ProvedRez
+	- src (zdrojove kody)
+	- vstupni_data (vase vstupni .plt soubory)
+	- bin (adresar s binarkami)
+	- skripty (zde je ulozen skript Prove)
 
 #### zbytek bude dotvoren skriptem. Skript je treba menit pouze v rozsahu For cyklu a nazvu vstupnich dat a pozadovanych rezu. Snaha byla udelat to tak srozumitelne, ze nebude prakticky potreba k tomu nic dodavat.
 
