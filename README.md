@@ -4,7 +4,7 @@ Prave pred sebou mate projekt, kde je vytvoren program, ktery provede rez skrz _
 
 ## Postup instalace:
 1. Klonovani repozitare:
-* Prejdete do slozky, kde chcete mit ulozena zdrojova data (Dobra volba muze byt _/opt_.). Zde si naklonujete repozitar prikazem:
+	* Prejdete do slozky, kde chcete mit ulozena zdrojova data (Dobra volba muze byt _/opt_.). Zde si naklonujete repozitar prikazem:
 
 	```bash
 	git clone https://github.com/vpokorny/ProvedRez.git
