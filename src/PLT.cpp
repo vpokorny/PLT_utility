@@ -93,7 +93,7 @@ int PLT::PLTNajdiPocetBodu(string radek)
     }
     else
     {
-        cout << "Chyba pri nacitani poctu bodu ... (konec radku)";
+        cout << "Chyba pri nacitani poctu bodu ... (konec radku)" << endl;
         exit(1);
     }
 }
