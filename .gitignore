@@ -1,0 +1,26 @@
+# Executables
+bin
+
+# Compiled Object files
+build
+
+# Compiled static libs
+lib
+
+# Documentation
+doc
+
+# Tests
+test
+
+# Vyvoj
+vyvoj
+
+# vim session
+vyvoj_session.vim
+
+# uzivatelska data
+vstupni_data
+vystup_gnuplot
+vystup_vtk
+vystup_plt
