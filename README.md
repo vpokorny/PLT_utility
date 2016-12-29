@@ -56,7 +56,7 @@ Utilita, ktera slouzi k inversni konversi nez vyse uvedena utilita. Tedy nacteni
 	* include _(hlavickove soubory)_
 	* vstupni_data _(vase vstupni .plt soubory)_
 	* bin _(adresar s binarkami)_
-	* skripty _(zde je ulozen skript ProvedRez.sh)_
+	* skripty _(zde je ulozen skript ProvedSekvenciRezu.sh)_
 
 	zbytek bude dotvoren skriptem. Skript je treba menit pouze v rozsahu _For_ cyklu a nazvu vstupnich dat a pozadovanych rezu. Snaha byla udelat to tak srozumitelne, ze nebude prakticky potreba k tomu nic dodavat.
 
