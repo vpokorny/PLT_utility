@@ -60,7 +60,7 @@ Utilita, ktera slouzi k inversni konversi nez vyse uvedena utilita. Tedy nacteni
 
 	zbytek bude dotvoren skriptem. Skript je treba menit pouze v rozsahu _For_ cyklu a nazvu vstupnich dat a pozadovanych rezu. Snaha byla udelat to tak srozumitelne, ze nebude prakticky potreba k tomu nic dodavat.
 
-4. Vystupni soubory:
+######## Vystupni soubory:
 - Vystupni soubory, pokud pouzijete skript, jsou ulozeny v adresari _vystup_gnuplot_. Jednotlive vysledky lze vizualizovat programem [Gnuplot](http://gnuplot.info).
 
 #### PLT2VTK, VTK2PTL
