@@ -21,7 +21,7 @@
 #include <fstream>
 #include <string>
 #include <sstream>
-#include "PLT.h"
+#include "../include/PLT.h"
 
 using namespace std;
 
@@ -161,15 +161,16 @@ void PLT::PLTVlozElementy(ifstream& file, Mesh& mesh)
     for(int i = 0; i < mesh.MeshVypisPocetElementu(); i++)
     {
         for(int j = 0; j < PocetVrcholu; j++)
+        {
             if (!(file >> Input.at(j)))
             {
                 cerr << "Chyba pri nacitani vrcholu elementu ..." << endl;
                 exit(1);
             }
-
+            //korekce indexu pro pocitani od 0
+            Input.at(j) -= 1;
+        }
         mesh.MeshVlozHodnotyDoTriangle(i, Input);
-        //  mesh.triangle[i].TriangleVypisVrcholy();
-        //  cin.get();
     }
     cout << "Hotovo ..." << endl;
 }
@@ -194,7 +195,8 @@ Mesh PLT::PLTNactiSoubor(string Filename)
     mesh.MeshVlozPocetElementu(PLTNajdiPocetElementu(radek));
     cout << "Pocet elementu site je: " << mesh.MeshVypisPocetElementu() << endl;
 
-    mesh.MeshRealokujPamet();
+    mesh.MeshRealokujPametBodu(mesh.MeshVypisPocetBodu());
+    mesh.MeshRealokujPametElementu(mesh.MeshVypisPocetElementu());
 
     PLTVlozBody(file, mesh);
     PLTPreskocRadky(file, 1);
@@ -208,4 +210,39 @@ Mesh PLT::PLTNactiSoubor(string Filename)
 
     file.close();
     return mesh;
+}
+
+void PLT::PLTExportujDoPLT(Mesh& mesh, string Filename)
+{
+    cout << "Exportuji do PLT ..." << endl;
+    ofstream file(Filename.c_str());
+
+    file << "VARIABLES= ";
+    for(int i = 0; i < mesh.MeshVypisPocetPromennych(); i++)
+    {
+        if(i == 0)
+            file << "\"" + mesh.MeshVypisNazevPromenne(i) + "\"";
+        else
+            file << ", \"" + mesh.MeshVypisNazevPromenne(i) + "\"";
+    }
+    file << endl;
+    file << "ZONE N=" << mesh.MeshVypisPocetBodu() << ", E=" << mesh.MeshVypisPocetElementu() << ", F=FEPOINT, ET=TRIANGLE" << endl;
+
+    for(int i = 0; i < mesh.MeshVypisPocetBodu(); i++)
+    {
+        for(int j = 0; j < mesh.MeshVypisPocetPromennych(); j++)
+        {
+            file << mesh.MeshVypisHodnotuPromenneVBode(i, mesh.MeshVypisNazevPromenne(j)) << " ";
+        }
+        file << endl;
+    }
+
+    file << endl;
+
+    //+ 1 protoze v PLT cisluji od 1 (ne od 0)
+    for(int i = 0; i < mesh.MeshVypisPocetElementu(); i++)
+        file << mesh.MeshVypisVrcholTriangle(i, "A") + 1 << " " << mesh.MeshVypisVrcholTriangle(i, "B") + 1 << " " << mesh.MeshVypisVrcholTriangle(i, "C") + 1 << endl;
+
+    file.close();
+    cout << "Export dokoncen ..." << endl;
 }

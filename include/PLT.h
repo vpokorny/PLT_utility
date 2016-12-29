@@ -34,6 +34,7 @@ class PLT {
 
     public:
         Mesh PLTNactiSoubor(string Filename);
+        void PLTExportujDoPLT(Mesh& mesh, string Filename);
 };
 
 #endif

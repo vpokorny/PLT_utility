@@ -16,7 +16,7 @@
  * =====================================================================================
  */
 
-#include "triangle.h"
+#include "../include/triangle.h"
 
 using namespace std;
 
@@ -53,17 +53,17 @@ int Triangle::TriangleVypisIndexVrcholu(string Vrchol)
     if (Vrchol.compare("A") == 0)
     {
         //cout << "Mam vrchol A" << endl;
-        return A - 1;
+        return A;
     }
     else if (Vrchol.compare("B") == 0)
     {
         //cout << "Mam vrchol B" << endl;
-        return B - 1;
+        return B;
     }
     else if (Vrchol.compare("C") == 0)
     {
         //cout << "Mam vrchol C" << endl;
-        return C - 1;
+        return C;
     }
     else
     {

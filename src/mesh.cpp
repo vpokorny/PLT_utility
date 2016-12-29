@@ -16,7 +16,7 @@
  * =====================================================================================
  */
 
-#include "mesh.h"
+#include "../include/mesh.h"
 
 Mesh::Mesh()
 {
@@ -38,6 +38,11 @@ void Mesh::MeshVlozNazvyPromennych(vector<string> NalezeneNazvyPromennych)
 {
     for(int i = 0; i < NalezeneNazvyPromennych.size(); i++)
         NazevPromennych.push_back(NalezeneNazvyPromennych[i]);
+}
+
+void Mesh::MeshVlozNazevPromene(string NazevPromenne)
+{
+    NazevPromennych.push_back(NazevPromenne);
 }
 
 void Mesh::MeshVlozPocetPromennych(int NalezenyPocetPromennych)
@@ -84,13 +89,23 @@ void Mesh::MeshVypisNazvyPromennych()
          << "--------------" << endl;
 }
 
-void Mesh::MeshRealokujPamet()
+void Mesh::MeshRealokujPametBodu(const int PocetBodu)
 {
     cout << "Realokuji pamet pro Body na: " << PocetBodu << endl;
-    cout << "Realokuji pamet pro Elementy na: " << PocetElementu << endl;
-    triangle.resize(PocetElementu);
     point.resize(PocetBodu);
     cout << "Hotovo ..." << endl;
+}
+
+void Mesh::MeshRealokujPametElementu(const int PocetElementu)
+{
+    cout << "Realokuji pamet pro Elementy na: " << PocetElementu << endl;
+    triangle.resize(PocetElementu);
+    cout << "Hotovo ..." << endl;
+}
+
+void Mesh::MeshVlozHodnotuDoBodu(int IndexBodu, double Hodnota)
+{
+    point.at(IndexBodu).PointVlozHodnotuPromenne(Hodnota);
 }
 
 void Mesh::MeshVlozHodnotyDoBodu(int IndexBodu, vector<double>& Promenne)

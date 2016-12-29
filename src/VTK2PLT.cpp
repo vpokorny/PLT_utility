@@ -1,9 +1,9 @@
 /*
  * =====================================================================================
  *
- *       Filename:  PLT2VTK.cpp
+ *       Filename:  VTK2PLT.cpp
  *
- *    Description:  Program for conversion PLT files to VTK files.
+ *    Description:  Program for conversion VKT files to PLT files.
  *
  *        Version:  1.0
  *        Created:  12/26/2016 01:50:04 PM
@@ -45,11 +45,11 @@ int main (int argc, char* argv[])
 {
     ZkontrolujVstupniParametry(argc, argv);
 
-    PLT plt;
-    Mesh mesh = plt.PLTNactiSoubor(argv[1]);
-
 	VTK vtk;
-	vtk.ExportujDoVTK(mesh, argv[2]);
+    Mesh mesh = vtk.NactiSoubor(argv[1]);
+
+    PLT plt;
+	plt.PLTExportujDoPLT(mesh, argv[2]);
 
     return 0;
 }

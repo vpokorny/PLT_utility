@@ -16,9 +16,9 @@
  * =====================================================================================
  */
 
-#include "mesh.h"
-#include "PLT.h"
-#include "intersect.h"
+#include "../include/mesh.h"
+#include "../include/PLT.h"
+#include "../include/intersect.h"
 
 using namespace std;
 
@@ -33,8 +33,8 @@ inline void ZkontrolujVstupniParametry(int argc, char* argv[])
 
     catch (int x)
     {
-        cerr << "Error number: " << x << endl
-             << "Usage: " << argv[0] << "'InputFilename' " << "'Zadany bod rezu ve formatu napr.: X=0.01234, nebo Y=0.01234 ' " << "'Output Filename' " << endl;
+        cerr << "Usage: " << argv[0] << " InputFilename" << " X=0.01234 (Vertikalni rez), nebo Y=0.01234 (Horizontalni rez)" << " OutputFilename" << endl;
+        exit(0);
     }
 
     cout << " Vstupni parametry jsou v poradku ..." << endl;

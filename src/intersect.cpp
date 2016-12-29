@@ -19,8 +19,7 @@
 #include <iostream>
 #include <fstream>
 #include <cmath>
-#include "intersect.h"
-#include "mesh.h"
+#include "../include/intersect.h"
 
 using namespace std;
 

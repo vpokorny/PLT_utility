@@ -43,11 +43,14 @@ class Mesh {
         int MeshVypisPocetBodu();
         int MeshVypisPocetElementu();
         void MeshVlozNazvyPromennych(vector<string> NalezeneNazvyPromennych);
+        void MeshVlozNazevPromene(string NazevPromenne);
         void MeshVypisNazvyPromennych();
         void MeshVlozPocetPromennych(int NalezenyPocetPromennych);
         void MeshVlozPocetBodu(int NalezenyPocetBodu);
         void MeshVlozPocetElementu(int NalezenuPocetElementu);
-        void MeshRealokujPamet();
+        void MeshRealokujPametBodu(const int PocetBodu);
+        void MeshRealokujPametElementu(const int PocetElementu);
+        void MeshVlozHodnotuDoBodu(int IndexBodu, double Hodnota);
         void MeshVlozHodnotyDoBodu(int IndexBodu, vector<double>& Promenne);
         void MeshVypisHodnotyPromennychVBode(int IndexBodu);
         string MeshVypisNazevPromenne(int IndexPromenne);
