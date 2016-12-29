@@ -40,13 +40,13 @@ Utilita, ktera slouzi k inversni konversi nez vyse uvedena utilita. Tedy nacteni
 1. Program ocekava vstup z prikazove radky takto:
 
 	```bash
-	./ProvedRez "Cesta/Nazev PLT souboru" "vertikalni rez X, nebo Horizontalni rez Y"="Hodnota X nebo Y" "Cesta/Nazev Vystupniho Souboru"*
+	./ProvedRez "Cesta/Nazev PLT souboru" "vertikalni rez X, nebo Horizontalni rez Y"="Hodnota X nebo Y" "Cesta/Nazev Vystupniho Souboru"
 	```
 
 2. Priklad: Mam soubor __solution4000.plt__ ve stejne slozce jako je spustitelny soubor __ProvedRez__ a chci provest vertikalni rez pro _x=0.01_. Vystupni soubor chci aby se jmenoval __solution4000-X-0.01.dat__. Toto provedu zadanim prikazu:
 
 	```bash
-	./ProvedRez solution4000.plt X=0.01 solution4000-X-0.01.dat*
+	./ProvedRez solution4000.plt X=0.01 solution4000-X-0.01.dat
 	```
 
 3. Poznamka: Pokud se chcete takovemu zadavani vyhnout, pak je v adresari _PLT_utility/skripty_ pripraven skript __ProvedSekvenciRezu.sh__, kterym je mozne provest vicero rezu automatizovane s tim, ze je potreba zachovat adresarovou strukturu priblizne takto
@@ -60,7 +60,7 @@ Utilita, ktera slouzi k inversni konversi nez vyse uvedena utilita. Tedy nacteni
 
 	zbytek bude dotvoren skriptem. Skript je treba menit pouze v rozsahu _For_ cyklu a nazvu vstupnich dat a pozadovanych rezu. Snaha byla udelat to tak srozumitelne, ze nebude prakticky potreba k tomu nic dodavat.
 
-######## Vystupni soubory:
+###### Vystupni soubory:
 - Vystupni soubory, pokud pouzijete skript, jsou ulozeny v adresari _vystup_gnuplot_. Jednotlive vysledky lze vizualizovat programem [Gnuplot](http://gnuplot.info).
 
 #### PLT2VTK, VTK2PTL
